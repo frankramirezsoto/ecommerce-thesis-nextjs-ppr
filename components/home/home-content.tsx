@@ -34,7 +34,7 @@ export function HomeContent({ featuredProducts }: HomeContentProps) {
             <p className="text-lg sm:text-xl text-white/90 mb-8">
               Explore our curated collection of premium products with unbeatable prices
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="absolute flex flex-wrap gap-4">
               <Button
                 size="lg"
                 variant="secondary"
