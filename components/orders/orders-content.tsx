@@ -10,7 +10,6 @@ import { Separator } from '@/components/ui/separator';
 import type { Order } from '@/types';
 import { storage } from '@/lib/storage';
 import { useAuth } from '@/components/providers/auth-provider';
-import Image from 'next/image';
 
 export function OrdersContent() {
   const router = useRouter();
@@ -94,7 +93,7 @@ export function OrdersContent() {
                   {order.items.map((item, index) => (
                     <div key={`${item.id}-${index}`}>
                       <div className="flex gap-4">
-                        <Image
+                        <img
                           src={item.image}
                           alt={item.title}
                           className="h-20 w-20 object-contain rounded border"

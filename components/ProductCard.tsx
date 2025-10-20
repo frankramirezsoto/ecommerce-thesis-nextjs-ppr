@@ -6,7 +6,6 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import type { Product } from '@/types';
 import { useCart } from '@/components/providers/cart-provider';
-import Image from 'next/image';
 
 interface ProductCardProps {
   product: Product;
@@ -22,7 +21,7 @@ export function ProductCard({ product }: ProductCardProps) {
       onClick={() => router.push(`/product/${product.id}`)}
     >
       <div className="aspect-square overflow-hidden bg-secondary/30">
-        <Image
+        <img
           src={product.image}
           alt={product.title}
           className="h-full w-full object-contain p-4 transition-transform duration-300 group-hover:scale-110"

@@ -13,7 +13,6 @@ import { useAuth } from '@/components/providers/auth-provider';
 import { storage } from '@/lib/storage';
 import { toast } from '@/hooks/use-toast';
 import type { Order } from '@/types';
-import Image from 'next/image';
 
 export function CheckoutContent() {
   const router = useRouter();
@@ -168,7 +167,7 @@ export function CheckoutContent() {
                 <div className="space-y-3">
                   {items.map((item) => (
                     <div key={item.id} className="flex gap-3">
-                      <Image
+                      <img
                         src={item.image}
                         alt={item.title}
                         className="h-16 w-16 object-contain rounded"
