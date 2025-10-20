@@ -9,7 +9,7 @@ export const experimental_ppr = true;
 export default async function ProductDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
   const product = await api.getProductById(id).catch(() => null);
