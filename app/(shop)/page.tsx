@@ -2,7 +2,7 @@ import { HomeContent } from '@/components/home/home-content';
 import { api } from '@/lib/api';
 import type { Product } from '@/types';
 
-export const revalidate = 60 * 60;
+export const revalidate = 3600;
 export const experimental_ppr = true;
 
 function pickFeatured(products: Product[]): Product[] {

@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import { api } from '@/lib/api';
 import { ProductDetailContent } from '@/components/products/product-detail-content';
 
-export const revalidate = 60 * 60;
+export const revalidate = 3600;
 export const experimental_ppr = true;
 
 export default async function ProductDetailPage({
