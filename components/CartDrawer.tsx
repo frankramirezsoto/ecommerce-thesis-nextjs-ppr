@@ -11,6 +11,7 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 
 export function CartDrawer() {
   const router = useRouter();
@@ -47,7 +48,7 @@ export function CartDrawer() {
             <div className="space-y-4">
               {items.map((item) => (
                 <div key={item.id} className="flex gap-4 p-4 rounded-lg border bg-card">
-                  <img
+                  <Image
                     src={item.image}
                     alt={item.title}
                     className="h-20 w-20 object-contain rounded"

@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, ShoppingCart, Star } from 'lucide-react';
 import type { Product } from '@/types';
 import { useCart } from '@/components/providers/cart-provider';
+import Image from 'next/image';
 
 export function ProductDetailContent({ product }: { product: Product }) {
   const router = useRouter();
@@ -26,7 +27,7 @@ export function ProductDetailContent({ product }: { product: Product }) {
 
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
           <div className="bg-secondary/30 rounded-lg p-8 flex items-center justify-center">
-            <img
+            <Image
               src={product.image}
               alt={product.title}
               className="max-h-[500px] w-auto object-contain"
