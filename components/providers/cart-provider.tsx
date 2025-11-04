@@ -10,6 +10,7 @@ interface CartContextValue {
   items: CartItem[];
   itemsCount: number;
   subtotal: number;
+  hydrated: boolean;
   isOpen: boolean;
   openCart: () => void;
   closeCart: () => void;
@@ -23,27 +24,29 @@ interface CartContextValue {
 const CartContext = createContext<CartContextValue | undefined>(undefined);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const { user } = useAuth();
+  const { user, hydrated: authHydrated } = useAuth();
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
-  const [hydrated, setHydrated] = useState(false);
+  const [cartHydrated, setCartHydrated] = useState(false);
 
   useEffect(() => {
     setItems(storage.getCart());
-    setHydrated(true);
+    setCartHydrated(true);
   }, []);
 
   useEffect(() => {
-    if (!hydrated) return;
+    if (!cartHydrated) return;
     storage.saveCart(items);
-  }, [items, hydrated]);
+  }, [items, cartHydrated]);
 
   useEffect(() => {
+    if (!authHydrated) return;
+
     if (!user) {
       setItems([]);
       storage.clearCart();
     }
-  }, [user]);
+  }, [authHydrated, user]);
 
   const openCart = useCallback(() => setIsOpen(true), []);
   const closeCart = useCallback(() => setIsOpen(false), []);
@@ -113,6 +116,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       items,
       itemsCount,
       subtotal,
+      hydrated: cartHydrated,
       isOpen,
       openCart,
       closeCart,
@@ -122,7 +126,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       removeItem,
       clearCart,
     };
-  }, [items, isOpen, openCart, closeCart, toggleCart, addToCart, updateQuantity, removeItem, clearCart]);
+  }, [items, cartHydrated, isOpen, openCart, closeCart, toggleCart, addToCart, updateQuantity, removeItem, clearCart]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
