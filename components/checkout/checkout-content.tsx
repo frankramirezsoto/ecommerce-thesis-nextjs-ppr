@@ -16,7 +16,7 @@ import type { Order } from '@/types';
 
 export function CheckoutContent() {
   const router = useRouter();
-  const { items, clearCart, subtotal } = useCart();
+  const { items, clearCart, subtotal, hydrated: cartHydrated } = useCart();
   const { user, hydrated } = useAuth();
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -25,7 +25,7 @@ export function CheckoutContent() {
   const total = useMemo(() => subtotal + shipping + tax, [subtotal, shipping, tax]);
 
   useEffect(() => {
-    if (!hydrated) return;
+    if (!hydrated || !cartHydrated) return;
 
     if (!user) {
       router.replace('/auth');
@@ -39,7 +39,7 @@ export function CheckoutContent() {
       });
       router.replace('/products');
     }
-  }, [hydrated, user, items.length, router]);
+  }, [hydrated, cartHydrated, user, items.length, router]);
 
   const handleCheckout = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -71,7 +71,7 @@ export function CheckoutContent() {
     }, 2000);
   };
 
-  if (!hydrated || !user || items.length === 0) {
+  if (!hydrated || !cartHydrated || !user || items.length === 0) {
     return null;
   }
 
